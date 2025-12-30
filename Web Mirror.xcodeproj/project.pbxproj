@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A3392442DA72F11009D190D /* Web_MirrorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392432DA72F11009D190D /* Web_MirrorApp.swift */; };
+		6A3392482DA72F13009D190D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A3392472DA72F13009D190D /* Assets.xcassets */; };
+		6A33924B2DA72F13009D190D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A33924A2DA72F13009D190D /* Preview Assets.xcassets */; };
+		6A3392532DA72FEB009D190D /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392522DA72FEB009D190D /* MenuBarController.swift */; };
+		6A3392552DA7301B009D190D /* WebcamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392542DA7301B009D190D /* WebcamManager.swift */; };
+		6A3392572DA73031009D190D /* WebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392562DA73031009D190D /* WebcamView.swift */; };
+		6A3392592DA73056009D190D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392582DA73056009D190D /* AppDelegate.swift */; };
+		863E41352F043B90007A6347 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 863E41342F043B90007A6347 /* LaunchAtLogin */; };
+		86762B872F0428BA00F6E30D /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 86762B862F0428BA00F6E30D /* LaunchAtLogin */; };
+		86762B892F042CD400F6E30D /* MenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86762B882F042CD400F6E30D /* MenuBuilder.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A3392402DA72F11009D190D /* Web Mirror.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Web Mirror.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A3392432DA72F11009D190D /* Web_MirrorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web_MirrorApp.swift; sourceTree = "<group>"; };
+		6A3392472DA72F13009D190D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A33924A2DA72F13009D190D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6A33924C2DA72F13009D190D /* Web_Mirror.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Web_Mirror.entitlements; sourceTree = "<group>"; };
+		6A3392522DA72FEB009D190D /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		6A3392542DA7301B009D190D /* WebcamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebcamManager.swift; sourceTree = "<group>"; };
+		6A3392562DA73031009D190D /* WebcamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebcamView.swift; sourceTree = "<group>"; };
+		6A3392582DA73056009D190D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6AA7E2522EF7977600C12DF7 /* Web-Mirror-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Web-Mirror-Info.plist"; sourceTree = SOURCE_ROOT; };
+		86762B882F042CD400F6E30D /* MenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuilder.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A33923D2DA72F11009D190D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				863E41352F043B90007A6347 /* LaunchAtLogin in Frameworks */,
+				86762B872F0428BA00F6E30D /* LaunchAtLogin in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A3392372DA72F11009D190D = {
+			isa = PBXGroup;
+			children = (
+				6A3392422DA72F11009D190D /* Web Mirror */,
+				6A3392412DA72F11009D190D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6A3392412DA72F11009D190D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A3392402DA72F11009D190D /* Web Mirror.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A3392422DA72F11009D190D /* Web Mirror */ = {
+			isa = PBXGroup;
+			children = (
+				86762B882F042CD400F6E30D /* MenuBuilder.swift */,
+				6AA7E2522EF7977600C12DF7 /* Web-Mirror-Info.plist */,
+				6A3392432DA72F11009D190D /* Web_MirrorApp.swift */,
+				6A3392522DA72FEB009D190D /* MenuBarController.swift */,
+				6A3392472DA72F13009D190D /* Assets.xcassets */,
+				6A33924C2DA72F13009D190D /* Web_Mirror.entitlements */,
+				6A3392492DA72F13009D190D /* Preview Content */,
+				6A3392542DA7301B009D190D /* WebcamManager.swift */,
+				6A3392562DA73031009D190D /* WebcamView.swift */,
+				6A3392582DA73056009D190D /* AppDelegate.swift */,
+			);
+			path = "Web Mirror";
+			sourceTree = "<group>";
+		};
+		6A3392492DA72F13009D190D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6A33924A2DA72F13009D190D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A33923F2DA72F11009D190D /* Web Mirror */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A33924F2DA72F13009D190D /* Build configuration list for PBXNativeTarget "Web Mirror" */;
+			buildPhases = (
+				6A33923C2DA72F11009D190D /* Sources */,
+				6A33923D2DA72F11009D190D /* Frameworks */,
+				6A33923E2DA72F11009D190D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Web Mirror";
+			productName = "Web Mirror";
+			productReference = 6A3392402DA72F11009D190D /* Web Mirror.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A3392382DA72F11009D190D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					6A33923F2DA72F11009D190D = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 6A33923B2DA72F11009D190D /* Build configuration list for PBXProject "Web Mirror" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6A3392372DA72F11009D190D;
+			packageReferences = (
+				863E41332F043B90007A6347 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Legacy" */,
+			);
+			productRefGroup = 6A3392412DA72F11009D190D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A33923F2DA72F11009D190D /* Web Mirror */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A33923E2DA72F11009D190D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A33924B2DA72F13009D190D /* Preview Assets.xcassets in Resources */,
+				6A3392482DA72F13009D190D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A33923C2DA72F11009D190D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A3392592DA73056009D190D /* AppDelegate.swift in Sources */,
+				6A3392572DA73031009D190D /* WebcamView.swift in Sources */,
+				86762B892F042CD400F6E30D /* MenuBuilder.swift in Sources */,
+				6A3392552DA7301B009D190D /* WebcamManager.swift in Sources */,
+				6A3392532DA72FEB009D190D /* MenuBarController.swift in Sources */,
+				6A3392442DA72F11009D190D /* Web_MirrorApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6A33924D2DA72F13009D190D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = N9Z25H5L44;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6A33924E2DA72F13009D190D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = N9Z25H5L44;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		6A3392502DA72F13009D190D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Web Mirror/Web_Mirror.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Web Mirror/Preview Content\"";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Web-Mirror-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Web Mirror";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Web Mirror needs camera permission to work properly, pwease enable it\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "leonardomunarolo.Web-Mirror";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6A3392512DA72F13009D190D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Web Mirror/Web_Mirror.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Web Mirror/Preview Content\"";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Web-Mirror-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Web Mirror";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Web Mirror needs camera permission to work properly, pwease enable it\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "leonardomunarolo.Web-Mirror";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A33923B2DA72F11009D190D /* Build configuration list for PBXProject "Web Mirror" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A33924D2DA72F13009D190D /* Debug */,
+				6A33924E2DA72F13009D190D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A33924F2DA72F13009D190D /* Build configuration list for PBXNativeTarget "Web Mirror" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A3392502DA72F13009D190D /* Debug */,
+				6A3392512DA72F13009D190D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		863E41332F043B90007A6347 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Legacy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Legacy";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		86762B852F0428BA00F6E30D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Legacy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Legacy";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		863E41342F043B90007A6347 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 863E41332F043B90007A6347 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Legacy" */;
+			productName = LaunchAtLogin;
+		};
+		86762B862F0428BA00F6E30D /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86762B852F0428BA00F6E30D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Legacy" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 6A3392382DA72F11009D190D /* Project object */;
+}
