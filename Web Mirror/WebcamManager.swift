@@ -4,7 +4,10 @@ final class WebcamManager: NSObject, ObservableObject {
 
     @Published private(set) var session: AVCaptureSession?
 
-    private let sessionQueue = DispatchQueue(label: "WebcamManager.SessionQueue")
+    private let sessionQueue = DispatchQueue(
+        label: "WebcamManager.SessionQueue",
+        qos: .userInitiated
+    )
     private var input: AVCaptureDeviceInput?
     private var isSessionRunning = false
 

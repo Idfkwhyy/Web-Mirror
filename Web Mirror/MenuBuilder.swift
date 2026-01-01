@@ -36,6 +36,11 @@ struct MenuBuilder {
         ))
 
         moreMenu.addItem(.separator())
+        
+        moreMenu.addItem(item(
+            "Mic Check",
+            #selector(MenuBarController.toggleMicCheck)
+        ))
 
         let launchItem = item(
             "Launch at Login",

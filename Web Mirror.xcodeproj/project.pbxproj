@@ -14,6 +14,8 @@
 		6A3392552DA7301B009D190D /* WebcamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392542DA7301B009D190D /* WebcamManager.swift */; };
 		6A3392572DA73031009D190D /* WebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392562DA73031009D190D /* WebcamView.swift */; };
 		6A3392592DA73056009D190D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3392582DA73056009D190D /* AppDelegate.swift */; };
+		8604EBF92F07136D00BA6909 /* MicLevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8604EBF82F07136D00BA6909 /* MicLevelManager.swift */; };
+		8604EBFD2F071B3900BA6909 /* MicLevelIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8604EBFC2F071B3900BA6909 /* MicLevelIndicatorView.swift */; };
 		863E41352F043B90007A6347 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 863E41342F043B90007A6347 /* LaunchAtLogin */; };
 		86762B872F0428BA00F6E30D /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 86762B862F0428BA00F6E30D /* LaunchAtLogin */; };
 		86762B892F042CD400F6E30D /* MenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86762B882F042CD400F6E30D /* MenuBuilder.swift */; };
@@ -30,6 +32,8 @@
 		6A3392562DA73031009D190D /* WebcamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebcamView.swift; sourceTree = "<group>"; };
 		6A3392582DA73056009D190D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AA7E2522EF7977600C12DF7 /* Web-Mirror-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Web-Mirror-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8604EBF82F07136D00BA6909 /* MicLevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicLevelManager.swift; sourceTree = "<group>"; };
+		8604EBFC2F071B3900BA6909 /* MicLevelIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicLevelIndicatorView.swift; sourceTree = "<group>"; };
 		86762B882F042CD400F6E30D /* MenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +69,8 @@
 		6A3392422DA72F11009D190D /* Web Mirror */ = {
 			isa = PBXGroup;
 			children = (
+				8604EBFC2F071B3900BA6909 /* MicLevelIndicatorView.swift */,
+				8604EBF82F07136D00BA6909 /* MicLevelManager.swift */,
 				86762B882F042CD400F6E30D /* MenuBuilder.swift */,
 				6AA7E2522EF7977600C12DF7 /* Web-Mirror-Info.plist */,
 				6A3392432DA72F11009D190D /* Web_MirrorApp.swift */,
@@ -162,10 +168,12 @@
 			files = (
 				6A3392592DA73056009D190D /* AppDelegate.swift in Sources */,
 				6A3392572DA73031009D190D /* WebcamView.swift in Sources */,
+				8604EBF92F07136D00BA6909 /* MicLevelManager.swift in Sources */,
 				86762B892F042CD400F6E30D /* MenuBuilder.swift in Sources */,
 				6A3392552DA7301B009D190D /* WebcamManager.swift in Sources */,
 				6A3392532DA72FEB009D190D /* MenuBarController.swift in Sources */,
 				6A3392442DA72F11009D190D /* Web_MirrorApp.swift in Sources */,
+				8604EBFD2F071B3900BA6909 /* MicLevelIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,13 +315,25 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Web Mirror/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Web-Mirror-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Mirror";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "\"Web Mirror needs camera permission to work properly, pwease enable it\"";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Web Mirror needs camera permission to work properly.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Web Mirror needs Microphone permission s the ic Check can work properly.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -340,13 +360,25 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Web Mirror/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Web-Mirror-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Mirror";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "\"Web Mirror needs camera permission to work properly, pwease enable it\"";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Web Mirror needs camera permission to work properly.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Web Mirror needs Microphone permission s the ic Check can work properly.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

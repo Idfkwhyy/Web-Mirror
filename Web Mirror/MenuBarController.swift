@@ -17,6 +17,10 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     private var menu: NSMenu
     private var launchAtLoginItem: NSMenuItem?
     private var globalClickMonitor: Any?
+    private let micLevelManager = MicLevelManager()
+    private var micCheckItem: NSMenuItem?
+
+    private let micCheckDefaultsKey = "MicCheckEnabled"
 
     private var currentPopoverSize: (width: CGFloat, height: CGFloat) = (480, 272)
 
@@ -45,7 +49,10 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
         self.webcamManager = WebcamManager()
         self.menu = NSMenu()
         self.hostingController = NSHostingController(
-            rootView: WebcamView(webcamManager: webcamManager)
+            rootView: WebcamView(
+                webcamManager: webcamManager,
+                micLevelManager: micLevelManager
+            )
         )
 
         super.init()
@@ -113,9 +120,14 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
             launchAtLoginItem: &launchAtLoginItem
         )
 
+        micCheckItem = menu.items
+            .flatMap { $0.submenu?.items ?? [] }
+            .first { $0.title == "Mic Check" }
+
         self.menu = menu
         updateSizeCheckmarks()
         syncLaunchAtLoginState()
+        syncMicCheckState()
     }
 
     // MARK: - Status Item Action
@@ -153,6 +165,9 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
         }
 
         webcamManager.startSession()
+        if UserDefaults.standard.bool(forKey: micCheckDefaultsKey) {
+            micLevelManager.start()
+        }
     }
 
     private func closePopover() {
@@ -166,6 +181,7 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
 
     func popoverDidClose(_ notification: Notification) {
         webcamManager.stopSession()
+        micLevelManager.stop()
     }
 
     // MARK: - Size Handling (Animated)
@@ -226,6 +242,20 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     @objc func toggleLaunchAtLogin() {
         LaunchAtLogin.isEnabled.toggle()
         syncLaunchAtLoginState()
+    }
+    
+    // MARK: - Mic Check
+    
+    @objc func toggleMicCheck() {
+        let enabled = !UserDefaults.standard.bool(forKey: micCheckDefaultsKey)
+        UserDefaults.standard.set(enabled, forKey: micCheckDefaultsKey)
+
+        micCheckItem?.state = enabled ? .on : .off
+
+        // If popover is already open, react immediately
+        if popover.isShown {
+            enabled ? micLevelManager.start() : micLevelManager.stop()
+        }
     }
 
     private func syncLaunchAtLoginState() {
@@ -299,6 +329,11 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
            ) {
             NSWorkspace.shared.open(url)
         }
+    }
+    
+    private func syncMicCheckState() {
+        let enabled = UserDefaults.standard.bool(forKey: micCheckDefaultsKey)
+        micCheckItem?.state = enabled ? .on : .off
     }
 
     @objc func openAboutWindow() {

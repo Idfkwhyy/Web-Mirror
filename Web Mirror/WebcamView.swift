@@ -3,14 +3,29 @@ import AVFoundation
 
 struct WebcamView: View {
     @ObservedObject var webcamManager: WebcamManager
+    @ObservedObject var micLevelManager: MicLevelManager
+
+    private var micCheckEnabled: Bool {
+        UserDefaults.standard.bool(forKey: "MicCheckEnabled")
+    }
 
     var body: some View {
         ZStack {
-            Color.clear // Transparent background
             WebcamPreviewContainer(webcamManager: webcamManager)
                 .aspectRatio(16/9, contentMode: .fit)
-                .shadow(radius: 6) // Optional for a subtle pop
+                .shadow(radius: 6)
                 .padding(-22)
+
+            if micCheckEnabled {
+                VStack {
+                    Spacer()
+                    HStack {
+                        MicLevelIndicatorView(level: micLevelManager.level)
+                        Spacer()
+                    }
+                }
+                .padding(8)
+            }
         }
     }
 }
