@@ -69,18 +69,14 @@
 		6A3392422DA72F11009D190D /* Web Mirror */ = {
 			isa = PBXGroup;
 			children = (
-				8604EBFC2F071B3900BA6909 /* MicLevelIndicatorView.swift */,
-				8604EBF82F07136D00BA6909 /* MicLevelManager.swift */,
-				86762B882F042CD400F6E30D /* MenuBuilder.swift */,
+				8604EC002F07287C00BA6909 /* Main */,
+				8604EBFE2F07286300BA6909 /* Mic Check */,
+				8604EBFF2F07287100BA6909 /* Menu Bar */,
+				8604EC012F07288A00BA6909 /* WebCam */,
 				6AA7E2522EF7977600C12DF7 /* Web-Mirror-Info.plist */,
-				6A3392432DA72F11009D190D /* Web_MirrorApp.swift */,
-				6A3392522DA72FEB009D190D /* MenuBarController.swift */,
 				6A3392472DA72F13009D190D /* Assets.xcassets */,
 				6A33924C2DA72F13009D190D /* Web_Mirror.entitlements */,
 				6A3392492DA72F13009D190D /* Preview Content */,
-				6A3392542DA7301B009D190D /* WebcamManager.swift */,
-				6A3392562DA73031009D190D /* WebcamView.swift */,
-				6A3392582DA73056009D190D /* AppDelegate.swift */,
 			);
 			path = "Web Mirror";
 			sourceTree = "<group>";
@@ -91,6 +87,42 @@
 				6A33924A2DA72F13009D190D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8604EBFE2F07286300BA6909 /* Mic Check */ = {
+			isa = PBXGroup;
+			children = (
+				8604EBFC2F071B3900BA6909 /* MicLevelIndicatorView.swift */,
+				8604EBF82F07136D00BA6909 /* MicLevelManager.swift */,
+			);
+			path = "Mic Check";
+			sourceTree = "<group>";
+		};
+		8604EBFF2F07287100BA6909 /* Menu Bar */ = {
+			isa = PBXGroup;
+			children = (
+				86762B882F042CD400F6E30D /* MenuBuilder.swift */,
+				6A3392522DA72FEB009D190D /* MenuBarController.swift */,
+			);
+			path = "Menu Bar";
+			sourceTree = "<group>";
+		};
+		8604EC002F07287C00BA6909 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6A3392432DA72F11009D190D /* Web_MirrorApp.swift */,
+				6A3392582DA73056009D190D /* AppDelegate.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8604EC012F07288A00BA6909 /* WebCam */ = {
+			isa = PBXGroup;
+			children = (
+				6A3392542DA7301B009D190D /* WebcamManager.swift */,
+				6A3392562DA73031009D190D /* WebcamView.swift */,
+			);
+			path = WebCam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,7 +153,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					6A33923F2DA72F11009D190D = {
 						CreatedOnToolsVersion = 15.2;
@@ -235,7 +267,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.7;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -294,7 +326,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.7;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -323,11 +355,12 @@
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
-				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
 				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
 				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Web-Mirror-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Mirror";
@@ -339,8 +372,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "leonardomunarolo.Web-Mirror";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.leonardomunarolo.Web-Mirror";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -368,11 +401,12 @@
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
-				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
 				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
 				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Web-Mirror-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Mirror";
@@ -384,8 +418,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "leonardomunarolo.Web-Mirror";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.leonardomunarolo.Web-Mirror";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -14,13 +14,10 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     // MARK: - State
 
     private let webcamManager: WebcamManager
+    private let micLevelManager = MicLevelManager()
     private var menu: NSMenu
     private var launchAtLoginItem: NSMenuItem?
     private var globalClickMonitor: Any?
-    private let micLevelManager = MicLevelManager()
-    private var micCheckItem: NSMenuItem?
-
-    private let micCheckDefaultsKey = "MicCheckEnabled"
 
     private var currentPopoverSize: (width: CGFloat, height: CGFloat) = (480, 272)
 
@@ -35,6 +32,13 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     ]
 
     private let iconDefaultsKey = "SelectedMenuBarIcon"
+    private let micCheckKey = "MicCheckEnabled"
+    private let closeBehaviorKey = "ClosePreviewBehavior"
+
+    enum CloseBehavior: String {
+        case icon
+        case outside
+    }
 
     // MARK: - Init
 
@@ -62,6 +66,8 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
         setupMenu()
         applyInitialMenuBarIcon()
         syncLaunchAtLoginState()
+        updateCloseBehaviorCheckmarks()
+        updateMicCheckState()
     }
 
     // MARK: - Configuration
@@ -98,42 +104,31 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
             launchAtLoginItem: &launchAtLoginItem
         )
 
-        // ---- Camera section ----
-        menu.addItem(.separator())
-
-        let cameraMenu = builder.makeCameraMenu(
+        builder.appendCameraAndMicSection(
+            to: menu,
             devices: webcamManager.availableDevices,
-            selectedID: UserDefaults.standard.string(forKey: "SelectedCameraID")
+            selectedCameraID: UserDefaults.standard.string(forKey: "SelectedCameraID")
         )
 
-        let cameraItem = NSMenuItem(
-            title: "Choose WebCam",
-            action: nil,
-            keyEquivalent: ""
-        )
-        menu.setSubmenu(cameraMenu, for: cameraItem)
-        menu.addItem(cameraItem)
+        builder.appendCloseBehaviorSection(to: menu)
 
-        // ---- More section ----
         builder.appendMoreMenu(
             to: menu,
             launchAtLoginItem: &launchAtLoginItem
         )
 
-        micCheckItem = menu.items
-            .flatMap { $0.submenu?.items ?? [] }
-            .first { $0.title == "Mic Check" }
-
         self.menu = menu
         updateSizeCheckmarks()
+        updateCloseBehaviorCheckmarks()
+        updateMicCheckState()
         syncLaunchAtLoginState()
-        syncMicCheckState()
     }
 
     // MARK: - Status Item Action
 
     @objc private func statusItemClicked(_ sender: AnyObject?) {
         if let event = NSApp.currentEvent, event.type == .rightMouseUp {
+            updateSizeCheckmarks()   // 🔹 optional but nice
             statusItem.menu = menu
             statusItem.button?.performClick(nil)
             statusItem.menu = nil
@@ -151,21 +146,24 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     private func showPopover() {
         guard let button = statusItem.button else { return }
 
-        popover.contentSize = NSSize(
-            width: currentPopoverSize.width,
-            height: currentPopoverSize.height
+        popover.show(
+            relativeTo: button.bounds,
+            of: button,
+            preferredEdge: .minY
         )
 
-        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-
-        globalClickMonitor = NSEvent.addGlobalMonitorForEvents(
-            matching: .leftMouseDown
-        ) { [weak self] _ in
-            self?.closePopover()
+        // Install outside-click monitor ONLY when configured
+        if closeBehavior == .outside {
+            globalClickMonitor = NSEvent.addGlobalMonitorForEvents(
+                matching: .leftMouseDown
+            ) { [weak self] _ in
+                self?.closePopover()
+            }
         }
 
         webcamManager.startSession()
-        if UserDefaults.standard.bool(forKey: micCheckDefaultsKey) {
+
+        if UserDefaults.standard.bool(forKey: micCheckKey) {
             micLevelManager.start()
         }
     }
@@ -173,6 +171,7 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     private func closePopover() {
         popover.performClose(nil)
 
+        // Always remove the monitor
         if let monitor = globalClickMonitor {
             NSEvent.removeMonitor(monitor)
             globalClickMonitor = nil
@@ -183,8 +182,8 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
         webcamManager.stopSession()
         micLevelManager.stop()
     }
-
-    // MARK: - Size Handling (Animated)
+    
+    // MARK: - Size Handling
 
     @objc func setSmallSize() { updatePopoverSize(384, 216) }
     @objc func setMediumSize() { updatePopoverSize(480, 272) }
@@ -193,38 +192,21 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     private func updatePopoverSize(_ width: CGFloat, _ height: CGFloat) {
         currentPopoverSize = (width, height)
         UserDefaults.standard.set([width, height], forKey: "SavedPopoverSize")
-
-        let newSize = NSSize(width: width, height: height)
-        animatePopoverResize(to: newSize)
-
+        popover.contentSize = NSSize(width: width, height: height)
         updateSizeCheckmarks()
-    }
-
-    private func animatePopoverResize(to size: NSSize) {
-        guard popover.isShown,
-              let contentView = popover.contentViewController?.view else {
-            popover.contentSize = size
-            return
-        }
-
-        NSAnimationContext.runAnimationGroup { context in
-            context.duration = 0.15
-            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            contentView.animator().setFrameSize(size)
-        }
     }
 
     private func updateSizeCheckmarks() {
         for item in menu.items {
             switch item.title {
-            case "Smol":
+            case "Small":
                 item.state = currentPopoverSize == (384, 216) ? .on : .off
-            case "Average":
+            case "Medium":
                 item.state = currentPopoverSize == (480, 272) ? .on : .off
-            case "Beeg":
+            case "Large":
                 item.state = currentPopoverSize == (640, 360) ? .on : .off
             default:
-                item.state = .off
+                break
             }
         }
     }
@@ -237,25 +219,54 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
         setupMenu()
     }
 
+    // MARK: - Mic Check
+
+    @objc func toggleMicCheck() {
+        let enabled = !UserDefaults.standard.bool(forKey: micCheckKey)
+        UserDefaults.standard.set(enabled, forKey: micCheckKey)
+        updateMicCheckState()
+    }
+
+    private func updateMicCheckState() {
+        for item in menu.items where item.title == "Mic Check" {
+            item.state = UserDefaults.standard.bool(forKey: micCheckKey) ? .on : .off
+        }
+    }
+
+    // MARK: - Close Behavior
+
+    private var closeBehavior: CloseBehavior {
+        let raw = UserDefaults.standard.string(forKey: closeBehaviorKey)
+        return CloseBehavior(rawValue: raw ?? "") ?? .outside
+    }
+
+    @objc func setCloseOnIcon() {
+        UserDefaults.standard.set(CloseBehavior.icon.rawValue, forKey: closeBehaviorKey)
+        closePopover()                       // important
+        updateCloseBehaviorCheckmarks()
+    }
+
+    @objc func setCloseOnOutside() {
+        UserDefaults.standard.set(CloseBehavior.outside.rawValue, forKey: closeBehaviorKey)
+        closePopover()                       // important
+        updateCloseBehaviorCheckmarks()
+    }
+
+    private func updateCloseBehaviorCheckmarks() {
+        for item in menu.items {
+            if item.title == "Clicking on Icon" {
+                item.state = closeBehavior == .icon ? .on : .off
+            } else if item.title == "Clicking Outside" {
+                item.state = closeBehavior == .outside ? .on : .off
+            }
+        }
+    }
+
     // MARK: - Launch at Login
 
     @objc func toggleLaunchAtLogin() {
         LaunchAtLogin.isEnabled.toggle()
         syncLaunchAtLoginState()
-    }
-    
-    // MARK: - Mic Check
-    
-    @objc func toggleMicCheck() {
-        let enabled = !UserDefaults.standard.bool(forKey: micCheckDefaultsKey)
-        UserDefaults.standard.set(enabled, forKey: micCheckDefaultsKey)
-
-        micCheckItem?.state = enabled ? .on : .off
-
-        // If popover is already open, react immediately
-        if popover.isShown {
-            enabled ? micLevelManager.start() : micLevelManager.stop()
-        }
     }
 
     private func syncLaunchAtLoginState() {
@@ -266,7 +277,6 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
 
     private func applyInitialMenuBarIcon() {
         let savedIcon = UserDefaults.standard.string(forKey: iconDefaultsKey)
-
         let iconName = savedIcon ?? "cybershot"
         updateMenuBarIcon(named: iconName)
 
@@ -277,7 +287,6 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
 
     @objc func chooseRandomIcon() {
         let currentIcon = UserDefaults.standard.string(forKey: iconDefaultsKey) ?? "cybershot"
-
         let candidates = iconNames.filter { $0 != currentIcon }
         let nextIcon = candidates.randomElement() ?? currentIcon
 
@@ -288,57 +297,119 @@ final class MenuBarController: NSObject, NSPopoverDelegate {
     private func updateMenuBarIcon(named name: String) {
         guard let button = statusItem.button else { return }
 
-        button.wantsLayer = true
-
         let newImage = NSImage(named: name)
         newImage?.isTemplate = true
 
-        // Fade out
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.15
-            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             button.animator().alphaValue = 0.0
         } completionHandler: {
-            // Swap image while invisible
             button.image = newImage
-
-            // Fade back in
             NSAnimationContext.runAnimationGroup { context in
                 context.duration = 0.15
-                context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                 button.animator().alphaValue = 1.0
             }
         }
     }
 
+    @objc func showAbout() {
+        let windowWidth: CGFloat = 280
+        let windowHeight: CGFloat = 150
 
-    // MARK: - Misc
+        let aboutWindow = NSWindow(
+            contentRect: NSMakeRect(0, 0, windowWidth, windowHeight),
+            styleMask: [.titled, .closable],
+            backing: .buffered,
+            defer: false
+        )
 
-    @objc func resetPermissions() {
-        let alert = NSAlert()
-        alert.alertStyle = .critical
-        alert.icon = NSApp.applicationIconImage
-        alert.messageText = "Accessibility Permissions Required"
-        alert.informativeText = "Try turning it off and on again (it usually works :3)"
-        alert.addButton(withTitle: "Open Settings")
-        alert.addButton(withTitle: "Cancel")
+        aboutWindow.title = ""
+        aboutWindow.isReleasedWhenClosed = false
+        aboutWindow.level = .floating
+        aboutWindow.center()
 
-        if alert.runModal() == .alertFirstButtonReturn,
-           let url = URL(
-            string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
-           ) {
-            NSWorkspace.shared.open(url)
-        }
+        let contentView = NSView(frame: NSMakeRect(0, 0, windowWidth, windowHeight))
+
+        // ---- Dynamic values ----
+
+        let info = Bundle.main.infoDictionary
+
+        let appName =
+            info?["CFBundleDisplayName"] as? String ??
+            info?["CFBundleName"] as? String ??
+            "Web Mirror"
+
+        let version =
+            info?["CFBundleShortVersionString"] as? String ?? "1.0"
+
+        let build =
+            info?["CFBundleVersion"] as? String ?? "1"
+
+        let developer =
+            info?["AppDeveloperName"] as? String ?? "Unknown Developer"
+
+        // ---- Layout ----
+
+        let iconSize: CGFloat = 60
+        let spacing: CGFloat = 4
+        let totalContentHeight = iconSize + 45
+        let startY = (windowHeight - totalContentHeight) / 2 + iconSize
+
+        let appIcon = NSImageView(
+            frame: NSRect(
+                x: (windowWidth - iconSize) / 2,
+                y: startY,
+                width: iconSize,
+                height: iconSize
+            )
+        )
+        appIcon.image = NSApp.applicationIconImage
+
+        let appNameLabel = NSTextField(labelWithString: appName)
+        appNameLabel.frame = NSRect(
+            x: 0,
+            y: startY - (20 + spacing),
+            width: windowWidth,
+            height: 20
+        )
+        appNameLabel.alignment = .center
+        appNameLabel.font = NSFont.boldSystemFont(ofSize: 14)
+
+        let versionLabel = NSTextField(
+            labelWithString: "Version \(version) (\(build))"
+        )
+        versionLabel.frame = NSRect(
+            x: 0,
+            y: startY - (40 + 2 * spacing),
+            width: windowWidth,
+            height: 20
+        )
+        versionLabel.alignment = .center
+        versionLabel.font = NSFont.systemFont(ofSize: 10)
+
+        let authorLabel = NSTextField(
+            labelWithString: "by \(developer)"
+        )
+        authorLabel.frame = NSRect(
+            x: 0,
+            y: startY - (65 + 3 * spacing),
+            width: windowWidth,
+            height: 20
+        )
+        authorLabel.alignment = .center
+        authorLabel.font = NSFont.systemFont(ofSize: 10)
+        authorLabel.textColor = .secondaryLabelColor
+
+        contentView.addSubview(appIcon)
+        contentView.addSubview(appNameLabel)
+        contentView.addSubview(versionLabel)
+        contentView.addSubview(authorLabel)
+
+        aboutWindow.contentView = contentView
+        aboutWindow.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
-    
-    private func syncMicCheckState() {
-        let enabled = UserDefaults.standard.bool(forKey: micCheckDefaultsKey)
-        micCheckItem?.state = enabled ? .on : .off
-    }
 
-    @objc func openAboutWindow() {
-        // unchanged
-    }
 
     @objc func quitApp() {
         NSApp.terminate(nil)

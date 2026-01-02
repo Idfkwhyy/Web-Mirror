@@ -12,13 +12,61 @@ struct MenuBuilder {
         let menu = NSMenu()
         menu.addItem(.separator())
 
-        menu.addItem(label("Change Preview Size"))
+        menu.addItem(label("Change Mirror Size"))
 
-        menu.addItem(item("Smol", #selector(MenuBarController.setSmallSize)))
-        menu.addItem(item("Average", #selector(MenuBarController.setMediumSize)))
-        menu.addItem(item("Beeg", #selector(MenuBarController.setLargeSize)))
+        menu.addItem(item("Small", #selector(MenuBarController.setSmallSize)))
+        menu.addItem(item("Medium", #selector(MenuBarController.setMediumSize)))
+        menu.addItem(item("Large", #selector(MenuBarController.setLargeSize)))
 
         return menu
+    }
+
+    func appendCameraAndMicSection(
+        to menu: NSMenu,
+        devices: [AVCaptureDevice],
+        selectedCameraID: String?
+    ) {
+
+        menu.addItem(.separator())
+
+        // ---- Camera submenu ----
+        let cameraMenu = makeCameraMenu(
+            devices: devices,
+            selectedID: selectedCameraID
+        )
+
+        let cameraItem = NSMenuItem(
+            title: "Choose WebCam",
+            action: nil,
+            keyEquivalent: ""
+        )
+        menu.setSubmenu(cameraMenu, for: cameraItem)
+        menu.addItem(cameraItem)
+
+        // ---- Mic check ----
+        menu.addItem(.separator())
+
+        menu.addItem(item(
+            "Mic Check",
+            #selector(MenuBarController.toggleMicCheck)
+        ))
+    }
+
+    func appendCloseBehaviorSection(to menu: NSMenu) {
+
+        menu.addItem(.separator())
+
+        menu.addItem(label("Close Mirror When"))
+
+        menu.addItem(item(
+            "Clicking on Icon",
+            #selector(MenuBarController.setCloseOnIcon)
+        ))
+
+        menu.addItem(item(
+            "Clicking Outside",
+            #selector(MenuBarController.setCloseOnOutside)
+        ))
     }
 
     func appendMoreMenu(
@@ -36,11 +84,6 @@ struct MenuBuilder {
         ))
 
         moreMenu.addItem(.separator())
-        
-        moreMenu.addItem(item(
-            "Mic Check",
-            #selector(MenuBarController.toggleMicCheck)
-        ))
 
         let launchItem = item(
             "Launch at Login",
@@ -50,13 +93,8 @@ struct MenuBuilder {
         moreMenu.addItem(launchItem)
 
         moreMenu.addItem(item(
-            "Reset Permissions",
-            #selector(MenuBarController.resetPermissions)
-        ))
-
-        moreMenu.addItem(item(
             "About",
-            #selector(MenuBarController.openAboutWindow)
+            #selector(MenuBarController.showAbout)
         ))
 
         let moreItem = NSMenuItem(title: "More", action: nil, keyEquivalent: "")

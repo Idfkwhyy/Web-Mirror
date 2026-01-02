@@ -25,6 +25,8 @@ struct WebcamView: View {
                     }
                 }
                 .padding(8)
+                // Optional: smooth appearance/disappearance
+                .transition(.opacity)
             }
         }
     }
@@ -42,13 +44,13 @@ struct WebcamPreviewContainer: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {
         DispatchQueue.main.async {
             guard let session = webcamManager.session else {
-                print("❌ No active camera session")
+                print("No active camera session")
                 return
             }
 
             if let previewLayer = nsView.layer as? AVCaptureVideoPreviewLayer {
                 previewLayer.session = session
-                print("🔄 Updated preview layer with active session")
+                print("Updated preview layer with active session")
             } else {
                 let previewLayer = AVCaptureVideoPreviewLayer(session: session)
                 previewLayer.videoGravity = .resizeAspectFill
@@ -57,13 +59,13 @@ struct WebcamPreviewContainer: NSViewRepresentable {
                 if let connection = previewLayer.connection, connection.isVideoMirroringSupported {
                     connection.automaticallyAdjustsVideoMirroring = false
                     connection.isVideoMirrored = true
-                    print("✅ Mirrored video enabled")
+                    print("Mirrored video enabled")
                 } else {
-                    print("⚠️ Video mirroring not supported")
+                    print("Video mirroring not supported")
                 }
 
                 nsView.layer = previewLayer
-                print("✅ Preview layer assigned")
+                print("Preview layer assigned")
             }
         }
     }

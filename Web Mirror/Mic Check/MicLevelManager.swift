@@ -1,11 +1,3 @@
-//
-//  MicLevelManager.swift
-//  Web Mirror
-//
-//  Created by Leonardo Munarolo on 1/1/26.
-//
-
-
 import AVFoundation
 import Combine
 import CoreGraphics

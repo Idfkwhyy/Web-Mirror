@@ -6,7 +6,7 @@ struct Web_MirrorApp: App {
 
     var body: some Scene {
         Settings {
-            EmptyView() // No settings window for now
+            EmptyView()
             .hidden()
         }
     }
